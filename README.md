@@ -1,1 +1,1 @@
-# https://luca-cybot.github.io/test-cybot/
+# https://luca-cybot.github.io/cbtest/
