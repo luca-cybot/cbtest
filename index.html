@@ -3,6 +3,24 @@
   
   <head>
     <h1>This is a CB test</h1>
+
+  <!-- Google Consent Mode -->
+  <script data-cookieconsent="ignore">
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag("consent", "default", {
+        ad_storage: "denied",
+        analytics_storage: "denied",
+        functionality_storage: "denied",
+        personalization_storage: "denied",
+        security_storage: "granted",
+        wait_for_update: 2000,
+    });
+    gtag("set", "ads_data_redaction", true);
+  </script>
+  <!-- End Google Consent Mode -->
     
   <!-- Google Tag Manager -->
   <script data-cookieconsent="ignore">
@@ -13,6 +31,16 @@
   })(window,document,'script','dataLayer','GTM-P7ZFT62');</script>
   <!-- End Google Tag Manager -->
     
+   <!-- Cookiebot -->   
+   <script 
+      id="Cookiebot" 
+      src="https://consent.cookiebot.com/uc.js" 
+      data-cbid="3d6bbcbc-000a-4fd9-93f9-55bfd45b9b53" 
+      data-blockingmode="auto" 
+      type="text/javascript"
+    ></script>
+    <!-- Cookiebot -->
+    
 </head>
 
 <body>
@@ -21,8 +49,8 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P7ZFT62"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    
+
     <img src="https://www.cookiebot.com/img/logo_contrast.svg" alt="W3Schools.com" width="800" height="300">
-  
+
 </body>
 </html>
