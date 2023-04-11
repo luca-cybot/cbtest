@@ -4,8 +4,6 @@
   <head>
     <h1>This is a CookieBot test site</h1>
     
-    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="3d6bbcbc-000a-4fd9-93f9-55bfd45b9b53" data-blockingmode="auto" type="text/javascript"></script>
-    
     <script>
     window.addEventListener('CookiebotOnDialogDisplay', function() {
         const categories = ['Preference', 'Statistics', 'Advertising', 'Unclassified'];
@@ -41,7 +39,11 @@
             });
         }
     });
-</script>
+    </script>
+
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="3d6bbcbc-000a-4fd9-93f9-55bfd45b9b53" data-blockingmode="auto" type="text/javascript"></script>
+    
+    
     
     <!-- Publisher restrictions
     <script id="CookiebotConfiguration" type="application/json" data-cookieconsent="ignore">
