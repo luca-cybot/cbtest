@@ -6,6 +6,43 @@
     
     <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="3d6bbcbc-000a-4fd9-93f9-55bfd45b9b53" data-blockingmode="auto" type="text/javascript"></script>
     
+    <script>
+    window.addEventListener('CookiebotOnDialogDisplay', function() {
+        const categories = ['Preference', 'Statistics', 'Advertising', 'Unclassified'];
+    
+        const categoryMap = new Map([
+            ['Preference', 'Preferences'],
+            ['Advertising', 'Marketing']
+        ]);
+    
+        var visibleCategories = 4;
+        for (const category of categories) {
+            if (CookieConsentDialog[`cookieTable${category}Count`] == 0) {
+                document.getElementById(
+                    `CybotCookiebotDialogDetailBodyContentCookieContainer${category}Card`
+                ).parentElement.style.display = 'none';
+    
+                if (category != 'Unclassified') {
+                    visibleCategories--;
+                    document.querySelector(
+                        `label[for='CybotCookiebotDialogBodyLevelButton${categoryMap.get(category) || category}']`
+                    ).parentElement.style.display = 'none';
+                    document.getElementById(
+                        `CybotCookiebotDialogBodyLevelButton${categoryMap.get(category) || category}`
+                    ).checked = false;
+                }
+            }
+        }
+    
+        if (['popup-v2', 'overlay-v2'].includes(CookieConsentDialog.template)) {
+            const width = Math.trunc(100 / visibleCategories);
+            document.querySelectorAll('.CybotCookiebotDialogBodyLevelButtonWrapper').forEach((e) => {
+                e.style.setProperty('width', `${width}%`, 'important');
+            });
+        }
+    });
+</script>
+    
     <!-- Publisher restrictions
     <script id="CookiebotConfiguration" type="application/json" data-cookieconsent="ignore">
     {
