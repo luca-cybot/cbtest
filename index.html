@@ -5,42 +5,25 @@
     <h1>This is a CookieBot test site</h1>
     
     <!-- Hide Empty Cookie Categories
-    <script>
-    window.addEventListener('CookiebotOnDialogDisplay', function() {
-        const categories = ['Preference', 'Statistics', 'Advertising', 'Unclassified'];
-    
-        const categoryMap = new Map([
-            ['Preference', 'Preferences'],
-            ['Advertising', 'Marketing']
-        ]);
-    
-        var visibleCategories = 4;
-        for (const category of categories) {
-            if (CookieConsentDialog[`cookieTable${category}Count`] == 0) {
-                document.getElementById(
-                    `CybotCookiebotDialogDetailBodyContentCookieContainer${category}Card`
-                ).parentElement.style.display = 'none';
-    
-                if (category != 'Unclassified') {
-                    visibleCategories--;
-                    document.querySelector(
-                        `label[for='CybotCookiebotDialogBodyLevelButton${categoryMap.get(category) || category}']`
-                    ).parentElement.style.display = 'none';
-                    document.getElementById(
-                        `CybotCookiebotDialogBodyLevelButton${categoryMap.get(category) || category}`
-                    ).checked = false;
-                }
-            }
-        }
-    
-        if (['popup-v2', 'overlay-v2'].includes(CookieConsentDialog.template)) {
-            const width = Math.trunc(100 / visibleCategories);
-            document.querySelectorAll('.CybotCookiebotDialogBodyLevelButtonWrapper').forEach((e) => {
-                e.style.setProperty('width', `${width}%`, 'important');
-            });
-        }
-    });
+
+    <script type="text/javascript">
+    window.addEventListener("CookiebotOnDialogDisplay", e => { 
+    const detailCategories = ["Preference", "Statistics", "Advertising", "Unclassified"], 
+    toggleCategories = ["Preferences", "Statistics", "Marketing"]; 
+    detailCategories.forEach(e => { 
+    if (CookieConsentDialog[`cookieTable${e}Count`] === 0) 
+    document.getElementById( 
+    `CybotCookiebotDialogDetailBodyContentCookieContainer${e}Card` 
+    ).parentNode.style.display = "none"; 
+    }); 
+    for (let i = 0; i < 3; i++) 
+    if (CookieConsentDialog[`cookieTable${detailCategories[i]}Count`] === 0) 
+    document.querySelector( 
+    `label[for=CybotCookiebotDialogBodyLevelButton${toggleCategories[i]}]` 
+    ).parentNode.style.display = "none"; 
+    }, !1)
     </script>
+
     -->
 
     <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="3d6bbcbc-000a-4fd9-93f9-55bfd45b9b53" data-blockingmode="auto" type="text/javascript"></script>
