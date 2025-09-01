@@ -3,7 +3,42 @@
   
   <head>
     <h1>This is a CookieBot test site</h1>
+
+
+     <!-- Google Consent Mode -->
+    <script data-cookieconsent="ignore">
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag("consent", "default", {
+        ad_storage: "denied",
+        analytics_storage: "denied",
+        functionality_storage: "denied",
+        personalization_storage: "denied",
+        security_storage: "granted",
+        wait_for_update: 500,
+    });
+    gtag("set", "ads_data_redaction", true);
+    gtag("set", "url_passthrough", true);
+    </script>
+    <!-- End Google Consent Mode -->
+
+
+    <!-- Google Tag Manager -->
+    <script data-cookieconsent="ignore">
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TS9JSQCK');
+    </script>
+    <!-- End Google Tag Manager -->
     
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="3d6bbcbc-000a-4fd9-93f9-55bfd45b9b53" data-blockingmode="auto" type="text/javascript"></script>
+    
+
+
     <!-- Hide Empty Cookie Categories
 
     <script type="text/javascript">
@@ -25,9 +60,6 @@
     </script>
 
     -->
-
-    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="3d6bbcbc-000a-4fd9-93f9-55bfd45b9b53" data-blockingmode="auto" type="text/javascript"></script>
-    
     
     
     <!-- Publisher restrictions
@@ -63,36 +95,6 @@
        async
      ></script>
      --> 
-
-    <!-- Google Consent Mode
-    <script data-cookieconsent="ignore">
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-        dataLayer.push(arguments);
-    }
-    gtag("consent", "default", {
-        ad_storage: "denied",
-        analytics_storage: "denied",
-        functionality_storage: "denied",
-        personalization_storage: "denied",
-        security_storage: "granted",
-        wait_for_update: 500,
-    });
-    gtag("set", "ads_data_redaction", true);
-    gtag("set", "url_passthrough", true);
-    </script>
-    -->    
-
-
-    <!-- Google Tag Manager
-    <script>
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-xxxxxx');</script>
-    -->
-
 
 </head>
 
