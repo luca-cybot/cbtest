@@ -42,13 +42,49 @@
     
     <script type="text/javascript">
     window.addEventListener('CookiebotOnDialogDisplay', function () {
-    if (new RegExp(`${Cookiebot.userCountry.toUpperCase()}`).test(
-    'AT|BE|BG|CY|CZ|DE|DK|EE|ES|FI|FR|GB|GR|HR|HU|IE|IT|LT|LU|LV|MT|NL|PL|PT|RO|SE|SI|SK')) {
-    Cookiebot.dialog.consentLevel = 'implied';
-    Cookiebot.dialog.setOnscrollEvent();
+    const euRegex = /AT|BE|BG|CY|CZ|DE|DK|EE|ES|FI|FR|GB|GR|HR|HU|IE|IT|LT|LU|LV|MT|NL|PL|PT|RO|SE|SI|SK/;
+    const country = (Cookiebot.userCountry || "").toUpperCase();
+    const excludedCountries = /US|BR|CA/;
+    if (excludedCountries.test(country)) {
+    console.log("Excluded country detected → No explicit/implicit logic applied");
+    return; 
     }
+
+    if (euRegex.test(country)) {
+      // EU → Explicit consent required
+      Cookiebot.dialog.consentLevel = 'strict';
+      Cookiebot.dialog.detachOnscrollEvent();
+      console.log("EU detected → Explicit consent required");
+    } else {
+      // Non-EU → Implicit consent
+      Cookiebot.dialog.consentLevel = 'implied';
+      Cookiebot.dialog.setOnscrollEvent();
+      console.log("Non-EU detected → Implicit consent active");
+
+      // Force full consent on first scroll
+      window.addEventListener("scroll", function () {
+        if (!Cookiebot.consent || Cookiebot.consent.method !== "implied") {
+          console.log("User scrolled → Forcing implicit consent");
+          Cookiebot.submitCustomConsent(true, true, true, true);
+        }
+      }, { once: true });
+
+      // Force full consent on first click
+      window.addEventListener("click", function () {
+        if (!Cookiebot.consent || Cookiebot.consent.method !== "implied") {
+          console.log("User clicked → Forcing implicit consent");
+          Cookiebot.submitCustomConsent(true, true, true, true);
+        }
+      }, { once: true });
+     }
+     });
+
+     // Debug: log consent updates
+    window.addEventListener("CookieConsentDeclaration", function () {
+    console.log("Consent updated:", Cookiebot.consent);
     });
     </script>
+
     
     <!-- Hide Empty Cookie Categories
 
