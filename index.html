@@ -38,47 +38,61 @@
     </script>
     End Google Tag Manager -->
 
-    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="3d6bbcbc-000a-4fd9-93f9-55bfd45b9b53" data-blockingmode="auto" type="text/javascript"></script>
+    <script
+    id="Cookiebot"
+    src="https://consent.cookiebot.com/uc.js"
+    data-cbid="3d6bbcbc-000a-4fd9-93f9-55bfd45b9b53"
+    data-blockingmode="auto" 
+    type="text/javascript" 
+    data-georegions="{'region':'US-06','cbid':'8eb1c21f-1a15-4d64-a511-9a7d1e2336c2'}"
+    ></script>
     
-    <script type="text/javascript">
-    window.addEventListener('CookiebotOnDialogDisplay', function () {
-    const euRegex = /AT|BE|BG|CY|CZ|DE|DK|EE|ES|FI|FR|GB|GR|HR|HU|IE|IT|LT|LU|LV|MT|NL|PL|PT|RO|SE|SI|SK/;
-    const country = (Cookiebot.userCountry || "").toUpperCase();
+  <script>
+    function logDebug(msg, obj) {
+      console.log("DEBUG:", msg, obj || "");
+      document.getElementById("status").textContent = msg;
+    }
 
-    if (euRegex.test(country)) {
-      // EU → Explicit consent required
-      Cookiebot.dialog.consentLevel = 'strict';
-      Cookiebot.dialog.detachOnscrollEvent();
-      console.log("EU detected → Explicit consent required");
-    } else {
-      // Non-EU → Implicit consent
-      Cookiebot.dialog.consentLevel = 'implied';
-      Cookiebot.dialog.setOnscrollEvent();
-      console.log("Non-EU detected → Implicit consent active");
+    function updateDebug() {
+      if (window.Cookiebot) {
+        document.getElementById("country").textContent = Cookiebot.userCountry || "N/A";
+        document.getElementById("consent").textContent = JSON.stringify(Cookiebot.consent, null, 2);
+        logDebug("Consent updated", Cookiebot.consent);
+      }
+    }
 
-      // Force full consent on first scroll
-      window.addEventListener("scroll", function () {
-        if (!Cookiebot.consent || Cookiebot.consent.method !== "implied") {
-          console.log("User scrolled → Forcing implicit consent");
-          Cookiebot.submitCustomConsent(true, true, true, true);
-        }
-      }, { once: true });
+    function simulateAccept(reason) {
+      logDebug(`User ${reason} → trying to click Accept All button`);
+      const acceptBtn = document.querySelector("#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll");
+      if (acceptBtn) {
+        logDebug("Accept All button found, simulating click", acceptBtn);
+        acceptBtn.click();
+      } else {
+        logDebug("Accept All button NOT found in DOM");
+      }
+      updateDebug();
+    }
 
-      // Force full consent on first click
-      window.addEventListener("click", function () {
-        if (!Cookiebot.consent || Cookiebot.consent.method !== "implied") {
-          console.log("User clicked → Forcing implicit consent");
-          Cookiebot.submitCustomConsent(true, true, true, true);
-        }
-      }, { once: true });
-     }
-     });
+    window.addEventListener("CookiebotOnDialogDisplay", function () {
+      const euRegex = /AT|BE|BG|CY|CZ|DE|DK|EE|ES|FI|FR|GB|GR|HR|HU|IE|IT|LT|LU|LV|MT|NL|PL|PT|RO|SE|SI|SK/;
+      const excluded = /BR|CA/;
+      const country = (Cookiebot.userCountry || "").toUpperCase();
 
-     // Debug: log consent updates
-    window.addEventListener("CookieConsentDeclaration", function () {
-    console.log("Consent updated:", Cookiebot.consent);
+      document.getElementById("country").textContent = country;
+
+      if (euRegex.test(country)) {
+        logDebug("EU detected → explicit consent required");
+      } else if (!excluded.test(country)) {
+        logDebug("Non-EU detected → implicit consent via scroll/click");
+        window.addEventListener("scroll", () => simulateAccept("scrolled"), { once: true });
+        window.addEventListener("click", () => simulateAccept("clicked"), { once: true });
+      } else {
+        logDebug("Excluded country → no implicit override");
+      }
     });
-    </script>
+
+    window.addEventListener("CookieConsentDeclaration", updateDebug);
+  </script>
 
     
     <!-- Hide Empty Cookie Categories
