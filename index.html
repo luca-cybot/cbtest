@@ -75,7 +75,7 @@
 
     window.addEventListener("CookiebotOnDialogDisplay", function () {
       const euRegex = /AT|BE|BG|CY|CZ|DE|DK|EE|ES|FI|FR|GB|GR|HR|HU|IE|IT|LT|LU|LV|MT|NL|PL|PT|RO|SE|SI|SK/;
-      const excluded = /US|BR|CA/;
+      const excluded = /BR|CA/;
       const country = (Cookiebot.userCountry || "").toUpperCase();
 
       document.getElementById("country").textContent = country;
